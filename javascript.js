@@ -1,25 +1,30 @@
 $(document).ready(function() {
 
-  var streamers = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "habathcx", "RobotCaleb", "noobs2ninjas"];
+  var streamers = ["canceldota", "aedrons", "cretetion", "freecodecamp", "habathcx", "RobotCaleb", "noobs2ninjas","froggedTV"];
   var streamButton;
   var streamBool;
   for (var x = 0; x < streamers.length; x++) {
     $.get("https://wind-bow.glitch.me/twitch-api/streams/" + streamers[x], function(dataStreams) {
         if (dataStreams.stream === null) {
-          streamButton = '<button type="button" class="btn btn-sm btn-secondary float-right" disabled>Offline</button>';
+          streamButton = '<button type="button" class="btn btn-sm btn-secondary float-left">Offline</button>';
           streamBool = false;
-        } else {
-          streamButton = '<button type="button" class="btn btn-sm btn-success float-right">Online</button>';
+        } else if (dataStreams.stream !== null)  {
+          streamButton = '<button type="button" class="btn btn-sm btn-success float-left">Online</button>';
           streamBool = true;
+        } else if (streamButton === 'undefined'){
+          streamButton = '<button type="button" class="btn btn-sm btn-warning float-left">Reload</button>';
+          streamBool = false;
         }
+        console.log(dataStreams);
     });
     $.get("https://wind-bow.glitch.me/twitch-api/channels/" + streamers[x], function(data) {
+        console.log(data.url);
         // $("#tab1").append('<div class="row"><div class="col col-md-4"> <img class="logo rounded d-inline align-left max-width" src="' + data.logo +'">' + '<div class="col col-md-8"><h4 class="d-inline">' + data.display_name +'</h4></div></div>');
-        $("#tab1").append('<br><img class="logo rounded alignleft max_width" alt="tabs_shortcode2" src="'+ data.logo +'">  <h4>'+ data.display_name + streamButton + '</h4> <p>' + data.status + '</p>');
+        $("#tab1").append('<div class="row"><div class="col-md-4"><img class="logo rounded float-right max_width img-fluid" alt="tabs_shortcode2" src="'+ data.logo +'"></div><a href="'+ data.url +'"><div class="col-md-4">  <h4>'+ data.display_name + '</a></h4></div><div class="col-md-4"><a href="'+ data.url +'">' + streamButton + '</a></div></div>');
         if (streamBool === false) {
-        $("#tab3").append('<br><img class="logo rounded alignleft max_width" alt="tabs_shortcode2" src="'+ data.logo +'">  <h4>'+ data.display_name + streamButton + '</h4> <p>' + data.status + '</p>');
+          $("#tab3").append('<div class="row"><div class="col-md-4"><img class="logo rounded float-right max_width img-fluid" alt="tabs_shortcode2" src="'+ data.logo +'"></div><a href="'+ data.url +'"><div class="col-md-4">  <h4>'+ data.display_name + '</a></h4> <p>' + data.status + '</p></div><div class="col-md-4"><a href="'+ data.url +'">' + streamButton + '</a></div></div>');
         } else {
-        $("#tab2").append('<br><img class="logo rounded alignleft max_width" alt="tabs_shortcode2" src="'+ data.logo +'">  <h4>'+ data.display_name + streamButton + '</h4> <p>' + data.status + '</p>');
+          $("#tab2").append('<div class="row"><div class="col-md-4"><img class="logo rounded float-right max_width img-fluid" alt="tabs_shortcode2" src="'+ data.logo +'"></div><a href="'+ data.url +'"><div class="col-md-4">  <h4>'+ data.display_name + '</a></h4> <p>' + data.status + '</p></div><div class="col-md-4"><a href="'+ data.url +'">' + streamButton + '</a></div></div>');
         }
         // $("#tab1").append('<div class="col-md-8"><h4 class="d-inline-block">' + data.display_name +'</h4></div></div>');
     });

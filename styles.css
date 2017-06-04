@@ -1,12 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .tab {
-  padding-top: 50px;
+  padding-top: 10px;
   margin-bottom: 20px;
   position: relative;
   overflow: hidden;
   background: #fff;
-  width: 70%;
+  width: 50%;
   margin: 0 auto;
   font-family: 'Roboto', sans-serif;
   line-height: 1.5;
@@ -15,28 +15,50 @@
   -webkit-font-smoothing: antialiased
 }
 
+ul.tabs.active{
+  margin:auto;
+}
+
+p {
+  font-weight: 400;
+  line-height: 1.5;
+  color: #888;
+  font-size: 0.85em;
+}
+
+a:link{
+  color: #87d3b7;
+}
+
+a:visited{
+  color: #87d3b7;
+}
+
  .jumbotron{
    border-bottom: 1px solid #888;
  }
  .logo{
 max-width: 70px;
 max-height: 70px;
+margin-bottom: 30px;
 }
 
 .tabs {
-  display: table;
+  float: none;
+  display: block;
   position: relative;
   overflow: hidden;
-  margin: 0;
-  width: 100%
+  margin: auto;
+  width: inherit;
 }
 
 .tabs li {
   float: left;
-  line-height: 38px;
+  align-items: center;
+  line-height: 48px;
   overflow: hidden;
   padding: 0;
-  position: relative
+  position: relative;
 }
 
 .tabs a {
